@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Login - CleanTasks</title>
+<style>
+body{font-family:Arial;background:#0f172a;color:white;margin:0;padding:20px}
+.card{background:#1e293b;padding:25px;border-radius:12px;max-width:400px;margin:30px auto;box-shadow:0 4px 20px rgba(0,0,0,0.5)}
+input{width:100%;padding:14px;font-size:16px;border-radius:8px;border:1px solid #334155;background:#0f172a;color:white;margin:10px 0;box-sizing:border-box}
+button{width:100%;padding:14px;background:#0d6efd;border:none;border-radius:8px;color:white;font-weight:bold;font-size:16px;cursor:pointer}
+button.admin{background:#00c853}
+.result{margin-top:15px;padding:15px;border-radius:8px;font-size:14px}
+.hidden{display:none}
+.task-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #334155;font-size:13px}
+</style>
+</head><body>
+
+<div id="loginBox" class="card">
+<h2>🔐 Admin Login</h2>
+<p style="font-size:12px;color:#94a3b8">Only admin can login here. Users see different page.</p>
+<input id="pass" type="password" placeholder="Enter Admin Password">
+<button onclick="login()">Login as Admin</button>
+<p style="font-size:11px;color:#64748b;margin-top:15px">Default password: 0119348942<br>You can change it in code</p>
+<div id="loginMsg"></div>
+<a href="index.html" style="display:block;text-align:center;margin-top:15px;color:#94a3b8;font-size:12px;text-decoration:none">← Back to User Site</a>
+</div>
+
+<div id="adminPanel" class="card hidden" style="max-width:500px">
+<h2>👑 Admin Dashboard</h2>
+<p style="font-size:12px;color:#94a3b8">Welcome Admin 0119348942</p>
+
+<div style="background:#0f172a;padding:15px;border-radius:8px;margin:15px 0">
+<b>📊 How to verify workers:</b><br>
+<span style="font-size:12px;color:#cbd5e1">
+1. Worker sends you CODE via WhatsApp<br>
+2. Paste CODE below<br>
+3. Check if REAL or FAKE<br>
+4. Check Adsterra clicks match views<br>
+5. Pay via M-Pesa
+</span>
+</div>
+
+<b>🔍 Verify Withdrawal Code</b>
+<input id="codeInput" placeholder="Paste code: CT-150-75-...">
+<button class="admin" onclick="verify()">Verify Code</button>
+<div id="result"></div>
+
+<div style="margin-top:20px;background:#0f172a;padding:12px;border-radius:8px">
+<b style="font-size:13px">💡 Code Format:</b><br>
+<span style="font-size:11px;color:#94a3b8">
+CT-BALANCE-VIEWS-TIME-RANDOM-DEVICE<br>
+Example: CT-150-75-4821-X9P2-A3K7<br><br>
+Balance must = Views x 2<br>
+Time changes every 10 mins<br>
+Device ID catches repeat scammers
+</span>
+</div>
+
+<button onclick="logout()" style="background:#334155;margin-top:20px">Logout</button>
+</div>
+
+<script>
+const ADMIN_PASSWORD="0119348942"; // CHANGE THIS TO YOUR OWN PASSWORD
+
+function login(){
+let p=document.getElementById('pass').value;
+if(p===ADMIN_PASSWORD){
+localStorage.setItem('ct_admin','1');
+document.getElementById('loginBox').classList.add('hidden');
+document.getElementById('adminPanel').classList.remove('hidden');
+}else{
+document.getElementById('loginMsg').innerHTML='<div class="result" style="background:#ef4444">❌ Wrong password</div>';
+}
+}
+function logout(){
+localStorage.removeItem('ct_admin');
+document.getElementById('adminPanel').classList.add('hidden');
+document.getElementById('loginBox').classList.remove('hidden');
+}
+function verify(){
+let c=document.getElementById('codeInput').value.trim();
+let r=document.getElementById('result');
+if(!c.startsWith('CT-')){r.innerHTML='<div class="result" style="background:#ef4444">❌ FAKE - Wrong format, must start with CT-</div>';return;}
+let parts=c.split('-');
+if(parts.length<6){r.innerHTML='<div class="result" style="background:#ef4444">❌ FAKE - Incomplete code</div>';return;}
+let bal=parseInt(parts[1]); let views=parseInt(parts[2]); let timeCode=parts[3];
+if(isNaN(bal)||isNaN(views)){r.innerHTML='<div class="result" style="background:#ef4444">❌ FAKE - Invalid numbers</div>';return;}
+if(bal!=views*2){r.innerHTML='<div class="result" style="background:#ef4444">❌ FAKE - Balance '+bal+' ≠ Views '+views+' x 2 (should be '+(views*2)+')</div>';return;}
+if(bal<150){r.innerHTML='<div class="result" style="background:#f59e0b;color:black">⚠️ Code valid but balance KES '+bal+' < 150. Tell worker to reach 150 first</div>';return;}
+let currentTime=Math.floor(Date.now()/600000).toString().slice(-4);
+if(timeCode!=currentTime){
+r.innerHTML='<div class="result" style="background:#f59e0b;color:black">⚠️ EXPIRED CODE<br>Code time: '+timeCode+'<br>Current time: '+currentTime+'<br>Ask worker to generate FRESH code NOW (expires every 10 mins)</div>';return;
+}
+r.innerHTML='<div class="result" style="background:#00c853">✅ REAL CODE - PAY IF ADSTERRA MATCHES<br><br><b>Balance:</b> KES '+bal+'<br><b>Views:</b> '+views+'<br><b>Device:</b> '+parts[5]+'<br><b>Random:</b> '+parts[4]+'<br><br>👉 NOW CHECK ADSTERRA:<br>Do you have ~'+views+' clicks today?<br>If YES → Pay KES '+bal+' via M-Pesa<br>If NO (0 clicks) → FAKE, they blocked ads</div>';
+}
+if(localStorage.getItem('ct_admin')==='1'){
+document.getElementById('loginBox').classList.add('hidden');
+document.getElementById('adminPanel').classList.remove('hidden');
+}
+</script>
+</body></html>
