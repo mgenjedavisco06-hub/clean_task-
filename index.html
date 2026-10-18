@@ -22,22 +22,28 @@
 <div class="text-[11px] text-slate-500 mt-2"><span id="left">75</span> tasks left • KES 2 each</div></div>
 </div>
 <div class="glass rounded-[28px] p-5 mt-5">
-<div class="flex gap-4"><div id="taskIcon" class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-2xl">📧</div>
-<div class="flex-1"><div class="text-[10px] text-slate-400 tracking-widest">TASK #<span id="taskNum">1</span> • <span id="adType" class="text-yellow-300">BONUS</span></div><div id="taskTitle" class="font-bold text-[18px] leading-tight mt-1">Clean 23 Spam Emails</div><div id="taskDesc" class="text-[12px] text-slate-400 mt-1">Mark promotions as read</div></div></div>
+<div class="flex gap-4"><div id="taskIcon" class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center text-2xl">📧</div>
+<div class="flex-1"><div class="text-[10px] text-slate-400 tracking-widest">TASK #<span id="taskNum">1</span> • <span id="adType" class="text-emerald-300">CLEANING</span></div><div id="taskTitle" class="font-bold text-[18px] leading-tight mt-1">Clean 23 Spam Emails</div><div id="taskDesc" class="text-[12px] text-slate-400 mt-1">Mark promotions as read</div></div></div>
 <button id="mainBtn" class="w-full mt-5 h-[62px] rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-black font-black text-[17px]">👁️ VIEW TASK & EARN KES 2</button>
-<div id="timerWrap" class="hidden text-center mt-3 text-[12px] text-yellow-300 bg-yellow-500/10 border border-yellow-500/20 rounded-xl py-2">⏳ Wait <span id="sec">6</span>s • Ad <span id="adNum">1</span> opened</div>
+<div id="timerWrap" class="hidden text-center mt-3 text-[12px] text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 rounded-xl py-2">⏳ Wait <span id="sec">6</span>s • Checking task...</div>
 </div>
-<div class="mt-5 rounded-[20px] bg-slate-900 border border-yellow-500/30 p-3">
-<p class="text-[10px] text-yellow-300 text-center tracking-[0.2em] mb-2 font-bold">🔥 SPONSORED • <span id="sponsorText">M-PESA BONUS</span> 🔥</p>
-<a id="adLink" href="https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=bonus1" target="_blank"><img id="adImage" src="https://via.placeholder.com/400x120/FFD700/000000?text=M-PESA+BONUS+KES+500" alt="Ad" style="width:100%;border-radius:14px;display:block;min-height:110px"></a>
-<button id="adBtn" class="w-full mt-3 h-[50px] rounded-xl bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-black text-[14px]">🎁 CLAIM M-PESA BONUS</button>
+<div class="mt-5 rounded-[20px] bg-slate-900 border border-emerald-500/20 p-3">
+<p class="text-[10px] text-emerald-300 text-center tracking-[0.2em] mb-2 font-bold">✓ TRUSTED PARTNER • <span id="sponsorText">SAFARICOM DATA</span> ✓</p>
+<a id="adLink" href="https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=bonus1" target="_blank"><img id="adImage" src="https://via.placeholder.com/400x120/10B981/FFFFFF?text=SAFARICOM+5GB+DATA+KES+99" alt="Ad" style="width:100%;border-radius:14px;display:block;min-height:110px"></a>
+<button id="adBtn" class="w-full mt-3 h-[50px] rounded-xl bg-gradient-to-r from-emerald-400 to-cyan-400 text-black font-black text-[14px]">✓ VIEW OFFER</button>
 </div>
 <div class="glass rounded-2xl p-4 mt-5"><div class="text-[11px] text-slate-400 tracking-widest mb-3">RECENT EARNINGS</div><div id="history"></div></div>
 <button id="resetBtn" class="w-full mt-6 h-10 rounded-xl bg-slate-800/50 text-[12px] text-slate-500">Reset Progress</button>
 </div>
 <script>
 const SMARTLINKS=["https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=bonus1","https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=mpesa1","https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=bonus2","https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=mpesa2","https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=kenya1"];
-const ADS=[{img:"https://via.placeholder.com/400x120/FFD700/000000?text=M-PESA+BONUS+KES+500",t:"M-PESA BONUS",b:"💰 CLAIM M-PESA BONUS"},{img:"https://via.placeholder.com/400x120/00FF88/000000?text=FREE+SPINS+KENYA+100",t:"FREE SPINS",b:"🎰 CLAIM 100 FREE SPINS"},{img:"https://via.placeholder.com/400x120/FF4444/FFFFFF?text=BET+BONUS+100%25+KES",t:"BET BONUS",b:"⚡ GET 100% BONUS NOW"},{img:"https://via.placeholder.com/400x120/4488FF/FFFFFF?text=DATA+DEALS+KENYA",t:"DATA DEALS",b:"📱 CLAIM DATA DEAL"},{img:"https://via.placeholder.com/400x120/FFAA00/000000?text=WIN+KES+10000+NOW",t:"WIN CASH",b:"💎 WIN KES 10K NOW"}];
+const ADS=[
+{img:"https://via.placeholder.com/400x120/10B981/FFFFFF?text=SAFARICOM+5GB+DATA+KES+99",t:"SAFARICOM DATA",b:"✓ VIEW DATA OFFER"},
+{img:"https://via.placeholder.com/400x120/059669/FFFFFF?text=M-PESA+CASHBACK+KES+100",t:"M-PESA REWARD",b:"✓ CLAIM CASHBACK"},
+{img:"https://via.placeholder.com/400x120/0891B2/FFFFFF?text=PHONE+CLEANER+FREE+UP+2GB",t:"PHONE CLEANER",b:"✓ CLEAN NOW"},
+{img:"https://via.placeholder.com/400x120/0E7490/FFFFFF?text=AIRTEL+10GB+NIGHT+DATA",t:"AIRTEL DATA",b:"✓ GET DATA BUNDLE"},
+{img:"https://via.placeholder.com/400x120/047857/FFFFFF?text=SAFARICOM+BONGA+POINTS",t:"BONGA POINTS",b:"✓ REDEEM BONGA"}
+];
 const TASKS=[{t:"Clean 23 Spam Emails",d:"Mark promotions as read",i:"📧"},{t:"Clean 15 Duplicate Photos",d:"Delete blurry duplicates",i:"🖼️"},{t:"Clean WhatsApp Cache",d:"Clear 156MB cache files",i:"💬"},{t:"Clean 42 Old Contacts",d:"Remove inactive numbers",i:"👤"},{t:"Clean Browser History",d:"Clear tracking cookies",i:"🌐"},{t:"Clean App Cache",d:"Free up phone storage",i:"🧹"}];
 let views=parseInt(localStorage.getItem('ct_views2')||'0');
 let bal=parseInt(localStorage.getItem('ct_bal2')||'0');
@@ -69,7 +75,6 @@ function doTask(){
 if(views>=75){withdraw();return;}
 let btn=document.getElementById('mainBtn');btn.disabled=true;
 document.getElementById('timerWrap').classList.remove('hidden');
-document.getElementById('adNum').innerText=(views%SMARTLINKS.length)+1;
 window.open(getLink(),"_blank");
 let s=6;document.getElementById('sec').innerText=s;btn.innerText=`WAIT ${s}s...`;
 let iv=setInterval(()=>{s--;document.getElementById('sec').innerText=s;btn.innerText=`WAIT ${s}s...`;if(s<=0){clearInterval(iv);views++;bal+=2;hist.push({t:TASKS[(views-1)%TASKS.length].t});localStorage.setItem('ct_views2',views);localStorage.setItem('ct_bal2',bal);localStorage.setItem('ct_hist2',JSON.stringify(hist));document.getElementById('timerWrap').classList.add('hidden');btn.disabled=false;render();}},1000);
