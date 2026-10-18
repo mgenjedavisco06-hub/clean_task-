@@ -9,6 +9,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap');
 body{font-family:'Outfit',sans-serif;background:#020617}
 .glass{background:rgba(30,41,59,0.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1)}
+button:active{transform:scale(0.97)}
 </style>
 </head>
 <body class="text-white min-h-screen pb-10">
@@ -34,36 +35,14 @@ body{font-family:'Outfit',sans-serif;background:#020617}
 <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-2xl" id="taskIcon">📧</div>
 <div class="flex-1"><div class="text-[11px] text-slate-400">TASK #<span id="taskNum">1</span> • <span id="adType" class="text-yellow-300">BONUS AD</span></div><div class="font-bold text-lg mt-1" id="taskTitle">Loading...</div><div class="text-xs text-slate-400 mt-1" id="taskDesc"></div></div>
 </div>
-<button id="mainBtn" onclick="doTask()" class="w-full mt-5 h-[64px] rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-black font-black text-lg">👁️ VIEW TASK & EARN KES 2</button>
+<button id="mainBtn" class="w-full mt-5 h-[64px] rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-black font-black text-lg">👁️ VIEW TASK & EARN KES 2</button>
 <div id="timerWrap" class="hidden text-center mt-3 text-xs text-yellow-300">⏳ Wait <span id="sec">6</span>s - Ad <span id="adNum">1</span> opened!</div>
 </div>
 
-<!-- ROTATING ADS - DIFFERENT EACH TIME -->
 <div class="mt-4 rounded-2xl bg-slate-800 border border-yellow-500/30 p-3">
 <p class="text-[10px] text-yellow-300 text-center tracking-widest mb-2">🔥 <span id="sponsorText">SPONSORED - HOT DEALS</span> 🔥</p>
 <a id="adLink" href="#" target="_blank">
-<img id="adImage" src="https://via.placeholder.com/320x100/FFD700/000000?text=LOADING+AD..." style="width:100%; border-radius:12px; min-height:100px; object-fit:cover;">
+<img id="adImage" src="" style="width:100%; border-radius:12px; min-height:100px; object-fit:cover;">
 </a>
-<button id="adBtn" onclick="openCurrentAd()" class="w-full mt-2 h-12 rounded-xl bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-black text-sm">🎁 CLAIM BONUS - TAP HERE</button>
-<p class="text-[9px] text-white/30 text-center mt-2">Different ad each task • Supports CleanTasks</p>
-</div>
-
-<div class="glass rounded-2xl p-4 mt-4"><div class="text-xs text-slate-400 mb-2">RECENT EARNINGS</div><div id="history" class="text-xs space-y-2"></div></div>
-
-<div class="flex gap-2 mt-4">
-<button onclick="resetAll()" class="flex-1 h-10 rounded-xl bg-slate-800 text-xs">Reset</button>
-</div>
-</div>
-
-<script>
-// YOUR SMARTLINK + ROTATION FOR DIFFERENT ADS
-const SMARTLINKS = [
-  "https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=bonus1",
-  "https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=bonus2",
-  "https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=mpesa1",
-  "https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=mpesa2",
-  "https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=kenya1"
-];
-
-const AD_CREATIVES = [
-  {img:"https://via.placeholder.com/320x100/FFD700/000000?text=🔥+M-PESA+BONUS+KES+500", text:"M-PESA BONUS OFFER", btn:"💰 CLAIM
+<button id="adBtn" class="w-full mt-2 h-12 rounded-xl bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-black text-sm">🎁 CLAIM BONUS - TAP HERE</button>
+<p class="text-[9px] text-white/30 text
