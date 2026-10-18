@@ -1,89 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CleanTasks Kenya</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
-<style>body{font-family:'Outfit',sans-serif;background:#020617}.glass{background:rgba(30,41,59,0.7);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.08)}</style>
-</head>
-<body class="text-white">
-<div class="max-w-[420px] mx-auto p-4 pb-10">
-<div class="flex justify-between items-center py-3">
-<div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400 flex items-center justify-center font-black text-black text-xl">C</div><div><div class="font-black leading-none">CleanTasks</div><div class="text-[10px] text-emerald-400 tracking-[0.25em] mt-1">KENYA • 0119348942</div></div></div>
-<div class="text-[10px] bg-emerald-500/15 text-emerald-300 border border-emerald-500/20 px-3 py-1.5 rounded-full">🟢 LIVE</div>
-</div>
-<div class="glass rounded-[28px] p-6 mt-3">
-<div class="flex justify-between items-center"><span class="text-[11px] text-slate-400 tracking-widest">YOUR BALANCE</span><span class="text-[9px] bg-slate-800 px-2 py-1 rounded-full">KES • M-PESA</span></div>
-<div class="text-[52px] font-black mt-1 leading-none">KES <span id="bal">0</span></div>
-<div class="mt-6"><div class="flex justify-between text-[12px] mb-2"><span class="text-slate-400">Progress</span><span class="font-bold"><span id="views">0</span>/75 tasks</span></div>
-<div class="w-full h-3 bg-slate-800 rounded-full overflow-hidden"><div id="bar" class="h-full bg-gradient-to-r from-emerald-400 to-cyan-400" style="width:0%"></div></div>
-<div class="text-[11px] text-slate-500 mt-2"><span id="left">75</span> tasks left • KES 2 each</div></div>
-</div>
-<div class="glass rounded-[28px] p-5 mt-5">
-<div class="flex gap-4"><div id="taskIcon" class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center text-2xl">📧</div>
-<div class="flex-1"><div class="text-[10px] text-slate-400 tracking-widest">TASK #<span id="taskNum">1</span> • <span id="adType" class="text-emerald-300">CLEANING</span></div><div id="taskTitle" class="font-bold text-[18px] leading-tight mt-1">Clean 23 Spam Emails</div><div id="taskDesc" class="text-[12px] text-slate-400 mt-1">Mark promotions as read</div></div></div>
-<button id="mainBtn" class="w-full mt-5 h-[62px] rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-black font-black text-[17px]">👁️ VIEW TASK & EARN KES 2</button>
-<div id="timerWrap" class="hidden text-center mt-3 text-[12px] text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 rounded-xl py-2">⏳ Wait <span id="sec">6</span>s • Checking task...</div>
-</div>
-<div class="mt-5 rounded-[20px] bg-slate-900 border border-emerald-500/20 p-3">
-<p class="text-[10px] text-emerald-300 text-center tracking-[0.2em] mb-2 font-bold">✓ TRUSTED PARTNER • <span id="sponsorText">SAFARICOM DATA</span> ✓</p>
-<a id="adLink" href="https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=bonus1" target="_blank"><img id="adImage" src="https://via.placeholder.com/400x120/10B981/FFFFFF?text=SAFARICOM+5GB+DATA+KES+99" alt="Ad" style="width:100%;border-radius:14px;display:block;min-height:110px"></a>
-<button id="adBtn" class="w-full mt-3 h-[50px] rounded-xl bg-gradient-to-r from-emerald-400 to-cyan-400 text-black font-black text-[14px]">✓ VIEW OFFER</button>
-</div>
-<div class="glass rounded-2xl p-4 mt-5"><div class="text-[11px] text-slate-400 tracking-widest mb-3">RECENT EARNINGS</div><div id="history"></div></div>
-<button id="resetBtn" class="w-full mt-6 h-10 rounded-xl bg-slate-800/50 text-[12px] text-slate-500">Reset Progress</button>
-</div>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CleanTasks KE</title><script src="https://cdn.tailwindcss.com"></script><style>body{font-family:sans-serif;background:#020617}</style></head><body class="text-white"><div class="max-w-[400px] mx-auto p-4">
+<div class="bg-slate-800 rounded-[24px] p-5 mt-3"><div class="text-[11px] text-slate-400">YOUR BALANCE</div><div class="text-[48px] font-black">KES <span id="bal">0</span></div><div class="w-full h-3 bg-slate-700 rounded-full mt-3 overflow-hidden"><div id="bar" class="h-full bg-emerald-400" style="width:0%"></div></div><div class="text-[11px] text-slate-500 mt-2"><span id="views">0</span>/75 tasks</div></div>
+<div class="bg-slate-800 rounded-[24px] p-5 mt-4"><div id="taskTitle" class="font-bold text-[18px]">Clean 23 Spam Emails</div><div id="taskDesc" class="text-[12px] text-slate-400">Mark as read</div><button id="mainBtn" class="w-full mt-4 h-[60px] rounded-2xl bg-emerald-400 text-black font-black">VIEW TASK & EARN KES 2</button><div id="timerWrap" class="hidden text-center mt-2 text-[12px] text-yellow-300">Wait <span id="sec">6</span>s</div></div>
+<div class="mt-4 rounded-[20px] bg-slate-900 border border-emerald-500/20 p-3"><p class="text-[10px] text-emerald-300 text-center font-bold">✓ TRUSTED PARTNER • <span id="sponsorText">SAFARICOM DATA</span> ✓</p><img id="adImage" src="https://via.placeholder.com/400x120/10B981/FFFFFF?text=SAFARICOM+5GB+DATA" style="width:100%;border-radius:12px;margin-top:8px"><button id="adBtn" class="w-full mt-3 h-[48px] rounded-xl bg-emerald-400 text-black font-black text-[14px]">VIEW OFFER</button></div>
+<div class="bg-slate-800/50 rounded-xl p-3 mt-4 text-[11px] text-slate-500 text-center">Earns KES 2 per task • Withdraw to 0119348942 at 75 tasks</div></div>
 <script>
-const SMARTLINKS=["https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=bonus1","https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=mpesa1","https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=bonus2","https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=mpesa2","https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=kenya1"];
-const ADS=[
-{img:"https://via.placeholder.com/400x120/10B981/FFFFFF?text=SAFARICOM+5GB+DATA+KES+99",t:"SAFARICOM DATA",b:"✓ VIEW DATA OFFER"},
-{img:"https://via.placeholder.com/400x120/059669/FFFFFF?text=M-PESA+CASHBACK+KES+100",t:"M-PESA REWARD",b:"✓ CLAIM CASHBACK"},
-{img:"https://via.placeholder.com/400x120/0891B2/FFFFFF?text=PHONE+CLEANER+FREE+UP+2GB",t:"PHONE CLEANER",b:"✓ CLEAN NOW"},
-{img:"https://via.placeholder.com/400x120/0E7490/FFFFFF?text=AIRTEL+10GB+NIGHT+DATA",t:"AIRTEL DATA",b:"✓ GET DATA BUNDLE"},
-{img:"https://via.placeholder.com/400x120/047857/FFFFFF?text=SAFARICOM+BONGA+POINTS",t:"BONGA POINTS",b:"✓ REDEEM BONGA"}
-];
-const TASKS=[{t:"Clean 23 Spam Emails",d:"Mark promotions as read",i:"📧"},{t:"Clean 15 Duplicate Photos",d:"Delete blurry duplicates",i:"🖼️"},{t:"Clean WhatsApp Cache",d:"Clear 156MB cache files",i:"💬"},{t:"Clean 42 Old Contacts",d:"Remove inactive numbers",i:"👤"},{t:"Clean Browser History",d:"Clear tracking cookies",i:"🌐"},{t:"Clean App Cache",d:"Free up phone storage",i:"🧹"}];
-let views=parseInt(localStorage.getItem('ct_views2')||'0');
-let bal=parseInt(localStorage.getItem('ct_bal2')||'0');
-let hist=JSON.parse(localStorage.getItem('ct_hist2')||'[]');
-function getLink(){return SMARTLINKS[views%SMARTLINKS.length];}
-function render(){
-document.getElementById('views').innerText=views;
-document.getElementById('bal').innerText=bal;
-document.getElementById('left').innerText=Math.max(0,75-views);
-document.getElementById('bar').style.width=(views/75*100)+'%';
-let task=TASKS[views%TASKS.length];
-document.getElementById('taskNum').innerText=views+1;
-document.getElementById('taskTitle').innerText=task.t;
-document.getElementById('taskDesc').innerText=task.d;
-document.getElementById('taskIcon').innerText=task.i;
-let ad=ADS[views%ADS.length];
-document.getElementById('adImage').src=ad.img;
-document.getElementById('sponsorText').innerText=ad.t;
-document.getElementById('adType').innerText=ad.t;
-document.getElementById('adBtn').innerText=ad.b;
-document.getElementById('adLink').href=getLink();
-let hDiv=document.getElementById('history');
-hDiv.innerHTML=hist.slice(-5).reverse().map(h=>`<div class="flex justify-between items-center bg-slate-800/60 p-2.5 rounded-xl text-[12px] mb-2"><span>${h.t}</span><span class="text-emerald-400 font-bold ml-2">+KES 2</span></div>`).join('')||`<div class="text-[12px] text-slate-600 text-center py-2">No tasks yet</div>`;
-let btn=document.getElementById('mainBtn');
-if(views>=75){btn.innerText='✅ WITHDRAW TO 0119348942';btn.className='w-full mt-5 h-[62px] rounded-2xl bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-black text-[17px]';}
-else{btn.innerText='👁️ VIEW TASK & EARN KES 2';btn.className='w-full mt-5 h-[62px] rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-black font-black text-[17px]';}
-}
-function doTask(){
-if(views>=75){withdraw();return;}
-let btn=document.getElementById('mainBtn');btn.disabled=true;
-document.getElementById('timerWrap').classList.remove('hidden');
-window.open(getLink(),"_blank");
-let s=6;document.getElementById('sec').innerText=s;btn.innerText=`WAIT ${s}s...`;
-let iv=setInterval(()=>{s--;document.getElementById('sec').innerText=s;btn.innerText=`WAIT ${s}s...`;if(s<=0){clearInterval(iv);views++;bal+=2;hist.push({t:TASKS[(views-1)%TASKS.length].t});localStorage.setItem('ct_views2',views);localStorage.setItem('ct_bal2',bal);localStorage.setItem('ct_hist2',JSON.stringify(hist));document.getElementById('timerWrap').classList.add('hidden');btn.disabled=false;render();}},1000);
-}
-function withdraw(){let id=Math.random().toString(36).substring(2,6).toUpperCase();let time=Math.floor(Date.now()/1000/600);let dev=btoa(navigator.userAgent).substring(0,10).replace(/[^A-Za-z0-9]/g,'').toUpperCase();let rand=Math.random().toString(36).substring(2,6).toUpperCase();let CODE=`CT-${id}-${time}-${dev}-${rand}`;let msg=`Hello CleanTasks!\n\nCODE: ${CODE}\nViews: ${views}/75\nBalance: KES ${bal}\nPhone: 0119348942\n\nPlease verify.`;window.location.href=`https://wa.me/254119348942?text=${encodeURIComponent(msg)}`;}
-document.getElementById('mainBtn').addEventListener('click',doTask);
-document.getElementById('adBtn').addEventListener('click',()=>window.open(getLink(),"_blank"));
-document.getElementById('resetBtn').addEventListener('click',()=>{if(confirm('Reset?')){localStorage.removeItem('ct_views2');localStorage.removeItem('ct_bal2');localStorage.removeItem('ct_hist2');location.reload();}});
-render();
-</script>
-</body>
-</html>
+const LINKS=["https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=1","https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=2","https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4?ad=3"];
+const ADS=[["SAFARICOM 5GB DATA KES 99","SAFARICOM DATA"],["M-PESA CASHBACK KES 100","M-PESA REWARD"],["PHONE CLEANER FREE UP 2GB","PHONE CLEANER"],["AIRTEL 10GB NIGHT DATA","AIRTEL DATA"]];
+const TASKS=[["Clean 23 Spam Emails","Mark as read"],["Clean Duplicate Photos","Delete blurry"],["Clean WhatsApp Cache","Clear 156MB"],["Clean Old Contacts","Remove inactive"],["Clean Browser History","Clear cookies"]];
+let v=parseInt(localStorage.getItem('ct_v')||'0');let b=parseInt(localStorage.getItem('ct_b')||'0');
+function getLink(){return LINKS[v%LINKS.length]}
+function render(){document.getElementById('views').innerText=v;document.getElementById('bal').innerText=b;document.getElementById('bar').style.width=(v/75*100)+'%';let t=TASKS[v%TASKS.length];document.getElementById('taskTitle').innerText=t[0];document.getElementById('taskDesc').innerText=t[1];let a=ADS[v%ADS.length];document.getElementById('adImage').src="https://via.placeholder.com/400x120/10B981/FFFFFF?text="+encodeURIComponent(a[0]);document.getElementById('sponsorText').innerText=a[1];let btn=document.getElementById('mainBtn');btn.innerText=v>=75?"WITHDRAW TO 0119348942":"VIEW TASK & EARN KES 2"}
+function doTask(){if(v>=75){let c="CT-"+Math.random().toString(36).slice(2,6).toUpperCase();window.location.href="https://wa.me/254119348942?text="+encodeURIComponent("CODE:"+c+" Views:"+v+" Bal:KES "+b);return}let btn=document.getElementById('mainBtn');btn.disabled=true;document.getElementById('timerWrap').classList.remove('hidden');window.open(getLink(),"_blank");let s=6;document.getElementById('sec').innerText=s;let iv=setInterval(()=>{s--;document.getElementById('sec').innerText=s;if(s<=0){clearInterval(iv);v++;b+=2;localStorage.setItem('ct_v',v);localStorage.setItem('ct_b',b);document.getElementById('timerWrap').classList.add('hidden');btn.disabled=false;render()}},1000)}
+document.getElementById('mainBtn').onclick=doTask;document.getElementById('adBtn').onclick=()=>window.open(getLink(),"_blank");render();
+</script></body></html>
