@@ -1,37 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CleanTasks</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CleanTasks Kenya</title>
 <style>
-body{font-family:Arial;background:#f0f2f5;padding:20px;text-align:center}
-.box{background:white;padding:30px;border-radius:15px;max-width:350px;margin:auto}
-button{background:#00c851;color:white;border:none;padding:20px;border-radius:12px;font-size:20px;width:100%;font-weight:bold}
-.done{background:#e8f5e9;padding:20px;border:2px solid #00c851;border-radius:12px}
+body{font-family:Arial;background:#f5f7fb;margin:0;padding:12px}
+.card{background:white;max-width:420px;margin:0 auto;padding:16px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.header{text-align:center;padding-bottom:12px;border-bottom:1px solid #eee}
+.balance{background:linear-gradient(135deg,#00c851,#00a344);color:white;padding:14px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;margin:12px 0}
+.task{border:1px solid #eee;padding:12px;border-radius:12px;margin:10px 0;transition:.2s}
+.task.done{background:#e8f5e9;border-color:#00c851;border-left:5px solid #00c851}
+.task.pending{border-left:5px solid #ff9800}
+.top{display:flex;justify-content:space-between;align-items:center}
+.btns{display:flex;gap:8px;margin-top:10px}
+.btn{flex:1;padding:11px;border:none;border-radius:9px;font-weight:bold;cursor:pointer}
+.clean{background:#e3f2fd;color:#1565c0}
+.cont{background:#00c851;color:white}
+.doneBtn{background:#e0e0e0;color:#666}
+.badge{font-size:11px;padding:4px 10px;border-radius:20px;font-weight:bold}
+.no{background:#fff3e0;color:#e65100}
+.yes{background:#00c851;color:white}
 </style>
 </head>
 <body>
-<div class="box" id="box">
-<h2>🧹 CleanTasks Kenya</h2>
-<p>Earn KES 10 - Clean one image</p>
-<img src="https://picsum.photos/300/150" style="width:100%;border-radius:10px;filter:blur(6px)" id="img">
-<p id="text">This image is dirty. Clean it to earn.</p>
-<button onclick="clean()" id="btn">🧼 CLEAN & EARN KES 10</button>
-</div>
+<div class="card" id="app"></div>
 <script>
-let isDone = localStorage.getItem('done')==='yes';
-if(isDone){showDone();}
-function clean(){
-document.getElementById('btn').innerHTML='Opening...';
-window.open('https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4','_blank');
-setTimeout(()=>{
-localStorage.setItem('done','yes');
-showDone();
-},800);
-}
-function showDone(){
-document.getElementById('box').innerHTML='<div class="done"><h2>✓ Task Completed!</h2><p>Image cleaned successfully</p><h3>KES 10 Earned</h3><p>Take screenshot as proof</p><br><button onclick="localStorage.clear();location.reload()" style="background:gray">Reset for new user</button></div>';
-}
-</script>
-</body>
-</html>
+const AD_LINK='https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4';
+const tasks=[
+{id:'yt',name:'YouTube',icon:'▶️',task:'Thumbnail cleaning'},
+{id:'tt',name:'TikTok',icon:'🎵',task:'Video frame cleaning'},
+{id:'ig',name:'Instagram',icon:'📸',task:'Photo cleaning'},
+{id:'fb',name:'Facebook',icon:'👍',task:'Post image cleaning'},
+{id:'x',name:'X/Twitter',icon:'🐦',task:'Banner cleaning'},
+{id:'wa',name:'WhatsApp',icon:'💬',task:'Status image cleaning'}
+];
+let data=JSON.parse(localStorage.getItem('cleanSafe')||'{}');
+function render(){
+let done=tasks.filter(t=>data[t.id]).length;
+let bal=done*2;
+let h=`<div class="header">
+<h2 style="margin:5px 0">🧹 CleanTasks Kenya</h2>
+<small>Clean dirty images & earn</small>
+<div class="balance">
+<div><small>Your Balance</small><br><b style="font-size:24px">KES ${bal}</b></div>
+<div style="text-align:right"><small>Progress</small><br><b>${done}/${tasks.length}</b><br><span class="badge ${done===tasks.length?'yes':'no'}">${done===tasks.length?'✓ DONE':'WORKING'}</span></div>
+</div>
+</div>`;
+tasks.forEach(t=>{
+let d=data[t.id];
+h+=`<div class="task ${d?'done':'pending'}">
+<div class="top">
+<div><b>${t.icon} ${t.name}</b><br><small>${t.task}</small><br><span class="badge ${d?'yes':'no'}">${d?'✓ COMPLETED - KES 2 Earned':'⏳ NOT COMPLETED'}</span></div>
+<div style="text-align:right">${d?'<span style="color:green;font-weight:bold">KES 2</span>':'<small>KES 2</small>'}</div>
+</div>
+<div class="btns">
+${d?`<button class="btn doneBtn">✓ Cleaned</button><button class="btn doneBtn">Paid</button>`:`<button class="btn clean" onclick="doClean('${t.id}')">🧼 Clean</button><button class="btn cont" onclick="go('${t.id}')">Continue →</button>`}
+</div>
+</div>`;
+});
+if(done===tasks.length){
+h+=`<div style="background:#e8f5e9;border:2px solid #00c851;padding:18px;border-radius:14px;text-align:center;margin-top:12px">
+<h3 style="margin:0">✓ Task Completed!</h3>
+<p>All images cleaned successfully</p>
+<h2 style="color:#00c851">KES ${bal} Earned</h2>
+<p>KES 2 x ${tasks.length} tasks</p>
+<p style="font-size:12px">Screenshot this page as proof</p>
+<button onclick="alert('Withdrawal of KES ${bal} requested! Pay in 24h')" style="background:#00c851;color:white;border:none;padding:14px;width:100%;border-radius:10px;font-weight:bold">
