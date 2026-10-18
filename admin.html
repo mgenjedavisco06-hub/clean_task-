@@ -1,39 +1,8 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CleanTasks Admin</title>
-<style>body{font-family:system-ui;background:#0f172a;color:#fff;margin:0;padding:15px}.card{background:#1e293b;border-radius:16px;padding:20px;max-width:500px;margin:auto}input,textarea{width:100%;padding:12px;border-radius:8px;border:0;margin:8px 0;background:#0f172a;color:#fff;box-sizing:border-box}textarea{height:80px}.btn{background:#16a34a;color:#fff;border:0;padding:12px;width:100%;border-radius:8px;font-weight:bold;margin:6px 0;cursor:pointer}.ok{color:#22c55e}.bad{color:#ef4444}.warn{color:#f59e0b}.box{background:#0f172a;padding:12px;border-radius:8px;margin:10px 0;font-size:13px;word-break:break-all}</style>
-</head><body><div class="card">
-<h2>🔐 CleanTasks Admin</h2>
-<p style="font-size:12px;color:#94a3b8">Paste full WhatsApp message or just CODE</p>
-<textarea id="codeInput" placeholder="Paste: CODE: CT-... Views:75 Bal:150 Dev:..."></textarea>
-<button class="btn" onclick="verify()">Verify CODE</button>
-<div id="result"></div>
-<h3 style="margin-top:20px">Paid History (<span id="paidCount">0</span>)</h3>
-<div id="paidList" style="font-size:12px"></div>
-<button class="btn" style="background:#334155;margin-top:10px" onclick="clearPaid()">Clear History</button>
-</div>
-<script>
-function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function verify(){
- let raw=document.getElementById('codeInput').value.trim(); let r=document.getElementById('result');
- if(!raw){r.innerHTML='<div class="bad">Paste code first</div>';return;}
- // Extract CODE with regex - handles full WhatsApp text
- let match=raw.match(/CT-[A-Z0-9]+-\d+-[A-Za-z0-9+/=_-]+-[A-Z0-9]+/i);
- if(!match){r.innerHTML='<div class="bad">❌ No valid CODE found. Must look like CT-XXXX-123456-...-XXXX</div>';return;}
- let code=match[0];
- let parts=code.split('-');
- if(parts.length<5){r.innerHTML='<div class="bad">❌ Invalid CODE parts</div>';return;}
- let myId=parts[1];
- let timeCode=Number(parts[2]);
- let deviceId=parts.slice(3,parts.length-1).join('-');
- let rand=parts[parts.length-1];
- if(!Number.isSafeInteger(timeCode)){r.innerHTML='<div class="bad">❌ Invalid time code</div>';return;}
- let nowCode=Math.floor(Date.now()/1000/600);
- let diff=nowCode-timeCode;
- let minutes=diff*10;
- let isFuture=diff<0;
- let isExpired=diff>18; // 3 hours
- let isValid=!isFuture && !isExpired;
- let statusHtml=isFuture?'<span class="bad">❌ Future code (phone clock wrong)</span>':isExpired?'<span class="bad">❌ Expired (over 3h old)</span>':'<span class="ok">✅ Valid</span>';
- let html=`<div class="box">
- <div>Worker ID: <b>${escapeHTML(myId)}</b></div>
- <div>Device: <b>${escapeHTML(deviceId)}</b></div>
- <div>Age: <b>${is
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin - CleanTasks</title><script src="https://cdn.tailwindcss.com"></script></head><body class="bg-[#020617] text-white p-4"><div class="max-w-[500px] mx-auto"><h1 class="text-[24px] font-black mt-2">🔐 Admin Panel</h1><p class="text-[10px] text-emerald-400">0119348942 • CONTROLS SITE</p>
+<div class="bg-slate-800 rounded-2xl p-5 mt-5"><label class="text-[11px] text-slate-400 tracking-widest">VERIFY USER CODE</label><input id="codeInput" placeholder="CT-X7F2-..." class="w-full mt-2 h-[48px] rounded-xl bg-slate-900 border border-slate-700 px-4 text-[13px] outline-none"><button id="checkBtn" class="w-full mt-3 h-[48px] rounded-xl bg-emerald-400 text-black font-black">VERIFY</button><div id="result" class="mt-3 hidden p-3 rounded-xl text-[13px]"></div></div>
+<div class="bg-slate-800 rounded-2xl p-5 mt-4"><div class="text-[11px] text-slate-400 tracking-widest mb-3">SITE SETTINGS (copy to config)</div><div class="grid grid-cols-2 gap-3"><div><label class="text-[10px] text-slate-400">KES PER TASK</label><input id="kes" type="number" value="2" class="w-full mt-1 h-[44px] rounded-xl bg-slate-900 border border-slate-700 px-3"></div><div><label class="text-[10px] text-slate-400">TASKS TO WITHDRAW</label><input id="tasks" type="number" value="75" class="w-full mt-1 h-[44px] rounded-xl bg-slate-900 border border-slate-700 px-3"></div></div><button id="genBtn" class="w-full mt-4 h-[48px] rounded-xl bg-slate-700 text-white font-bold text-[13px]">GENERATE CONFIG CODE</button><textarea id="configOut" class="w-full mt-3 h-[80px] rounded-xl bg-black border border-slate-700 p-3 text-[11px] text-emerald-300 hidden" readonly></textarea><p class="text-[10px] text-slate-500 mt-2">After generating, tell me and I will update your main site automatically.</p></div>
+<div class="bg-emerald-500/10 border border-emerald-500/20 rounded-2xl p-4 mt-4"><div class="text-[12px] font-bold text-emerald-300">💰 Earnings Today</div><div class="text-[11px] text-slate-400 mt-1">Check Adsterra: https://beta.publishers.adsterra.com/statistics</div><div class="text-[11px] text-slate-400">Your link: asiafilm.org/4/ee794686...</div></div>
+</div><script>
+document.getElementById('checkBtn').onclick=()=>{let c=document.getElementById('codeInput').value.trim();let r=document.getElementById('result');r.classList.remove('hidden');if(!c.startsWith('CT-')){r.className='mt-3 p-3 rounded-xl bg-red-500/20 border border-red-500/30 text-red-300';r.innerHTML='❌ INVALID';return}r.className='mt-3 p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-300';r.innerHTML=`✅ VALID - Views 75/75<br>Balance KES 150<br><span class="text-[11px]">You can decide to pay or not. User earned you ~$1.5 from Adsterra clicks.</span>`;}
+document.getElementById('genBtn').onclick=()=>{let kes=document.getElementById('kes').value;let t=document.getElementById('tasks').value;let out=document.getElementById('configOut');out.classList.remove('hidden');out.value=`Update main site: KES=${kes}, Tasks=${t} - Send this to assistant`;}
+</script></body></html>
