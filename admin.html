@@ -1,49 +1,39 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CleanTasks ADMIN</title>
-<style>body{font-family:system-ui;background:#0f172a;color:#fff;margin:0;padding:15px}.card{background:#1e293b;border-radius:16px;padding:20px;max-width:500px;margin:auto;margin-bottom:15px}.input{width:100%;padding:12px;border-radius:8px;border:0;margin:8px 0;background:#334155;color:#fff;box-sizing:border-box}.btn{background:#16a34a;color:#fff;border:0;padding:12px;width:100%;border-radius:10px;font-weight:bold;margin:6px 0}.btn2{background:#f59e0b}.btn3{background:#ef4444}.ok{color:#22c55e}.bad{color:#ef4444}.item{background:#334155;padding:10px;border-radius:8px;margin:5px 0;font-size:13px}</style></head><body>
-<div class="card"><h2>🔐 CleanTasks ADMIN</h2><p style="font-size:12px;color:#94a3b8">Verify withdrawals - Profit tracker</p>
-<label>Paste CODE from WhatsApp:</label>
-<textarea id="codeInput" class="input" rows="3" placeholder="CT-XXXXXX-XXXXX-DEVICE-RAND"></textarea>
-<button class="btn" onclick="verify()">🔍 VERIFY CODE</button>
-<div id="result" style="margin:10px 0"></div>
-<label>Worker Views (from message):</label><input id="viewsIn" type="number" class="input" placeholder="75">
-<label>Device ID (from message):</label><input id="deviceIn" class="input" placeholder="device id">
-<button class="btn btn2" onclick="approve()">✅ APPROVE & PAY KES 150</button>
-<button class="btn btn3" onclick="reject()">❌ REJECT - FAKE</button>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CleanTasks Admin</title>
+<style>body{font-family:system-ui;background:#0f172a;color:#fff;margin:0;padding:15px}.card{background:#1e293b;border-radius:16px;padding:20px;max-width:500px;margin:auto}input,textarea{width:100%;padding:12px;border-radius:8px;border:0;margin:8px 0;background:#0f172a;color:#fff;box-sizing:border-box}textarea{height:80px}.btn{background:#16a34a;color:#fff;border:0;padding:12px;width:100%;border-radius:8px;font-weight:bold;margin:6px 0;cursor:pointer}.ok{color:#22c55e}.bad{color:#ef4444}.warn{color:#f59e0b}.box{background:#0f172a;padding:12px;border-radius:8px;margin:10px 0;font-size:13px;word-break:break-all}</style>
+</head><body><div class="card">
+<h2>🔐 CleanTasks Admin</h2>
+<p style="font-size:12px;color:#94a3b8">Paste full WhatsApp message or just CODE</p>
+<textarea id="codeInput" placeholder="Paste: CODE: CT-... Views:75 Bal:150 Dev:..."></textarea>
+<button class="btn" onclick="verify()">Verify CODE</button>
+<div id="result"></div>
+<h3 style="margin-top:20px">Paid History (<span id="paidCount">0</span>)</h3>
+<div id="paidList" style="font-size:12px"></div>
+<button class="btn" style="background:#334155;margin-top:10px" onclick="clearPaid()">Clear History</button>
 </div>
-
-<div class="card"><h3>📊 Today's Stats</h3>
-<div>Approved Today: <b id="todayCount">0</b></div>
-<div>Profit Today: <b>KES <span id="todayProfit">0</span></b> (KES 45 per worker)</div>
-<div>Total Approved: <b id="totalCount">0</b></div>
-<div style="margin-top:10px"><button class="btn" style="background:#334155" onclick="clearData()">Clear All Data</button></div>
-</div>
-
-<div class="card"><h3>📜 Approved List</h3><div id="list"></div></div>
-
 <script>
-let approved = JSON.parse(localStorage.getItem('ct_admin_approved')||'[]');
-function render(){document.getElementById('totalCount').innerText=approved.length;let today=new Date().toDateString();let todayList=approved.filter(a=>new Date(a.time).toDateString()==today);document.getElementById('todayCount').innerText=todayList.length;document.getElementById('todayProfit').innerText=todayList.length*45;document.getElementById('list').innerHTML=approved.slice(-20).reverse().map(a=>`<div class="item">${a.code}<br><small>${a.device} | ${new Date(a.time).toLocaleString()} | Views:${a.views}</small></div>`).join('');} render();
-
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function verify(){
- let code=document.getElementById('codeInput').value.trim();
- if(!code.startsWith('CT-')){document.getElementById('result').innerHTML='<span class="bad">❌ Invalid format - Must start with CT-</span>';return;}
- let parts=code.split('-'); if(parts.length<5){document.getElementById('result').innerHTML='<span class="bad">❌ Invalid parts</span>';return;}
- let myId=parts[1], timeCode=parseInt(parts[2]), deviceId=parts[3], rand=parts[4];
- let nowCode=Math.floor(Date.now()/1000/600); let diff=nowCode-timeCode;
- let validTime=diff>=0 && diff<=144; // 144*10min = 24h
- let html=`<div class="item"><b>MyID:</b> ${myId}<br><b>TimeCode:</b> ${timeCode} ( ${diff*10} mins ago ) ${validTime?'<span class="ok">✅ Valid</span>':'<span class="bad">❌ EXPIRED >24h</span>'}<br><b>Device:</b> ${deviceId}<br><b>Rand:</b> ${rand}<br><br>`;
- if(approved.find(a=>a.code===code)){html+=`<span class="bad">⚠️ ALREADY PAID - DUPLICATE!</span></div>`;}
- else{html+=`${validTime?'<span class="ok">✅ Can Pay - Profit KES 45</span>':'<span class="bad">❌ Check views</span>'}</div>`;}
- document.getElementById('result').innerHTML=html;
- document.getElementById('deviceIn').value=deviceId;
-}
-
-function approve(){
- let code=document.getElementById('codeInput').value.trim(); let device=document.getElementById('deviceIn').value; let views=document.getElementById('viewsIn').value||75;
- if(!code)return alert('Paste code first'); if(approved.find(a=>a.code===code))return alert('Already approved!');
- approved.push({code, device, views, time:new Date().toISOString()}); localStorage.setItem('ct_admin_approved',JSON.stringify(approved)); render(); alert('✅ Approved! Pay worker KES 150 via M-Pesa. Your profit: KES 45');
-}
-
-function reject(){alert('❌ Rejected - Tell worker fake data');}
-function clearData(){if(confirm('Clear all approved?')){localStorage.removeItem('ct_admin_approved');approved=[];render();}}
-</script></body></html>
+ let raw=document.getElementById('codeInput').value.trim(); let r=document.getElementById('result');
+ if(!raw){r.innerHTML='<div class="bad">Paste code first</div>';return;}
+ // Extract CODE with regex - handles full WhatsApp text
+ let match=raw.match(/CT-[A-Z0-9]+-\d+-[A-Za-z0-9+/=_-]+-[A-Z0-9]+/i);
+ if(!match){r.innerHTML='<div class="bad">❌ No valid CODE found. Must look like CT-XXXX-123456-...-XXXX</div>';return;}
+ let code=match[0];
+ let parts=code.split('-');
+ if(parts.length<5){r.innerHTML='<div class="bad">❌ Invalid CODE parts</div>';return;}
+ let myId=parts[1];
+ let timeCode=Number(parts[2]);
+ let deviceId=parts.slice(3,parts.length-1).join('-');
+ let rand=parts[parts.length-1];
+ if(!Number.isSafeInteger(timeCode)){r.innerHTML='<div class="bad">❌ Invalid time code</div>';return;}
+ let nowCode=Math.floor(Date.now()/1000/600);
+ let diff=nowCode-timeCode;
+ let minutes=diff*10;
+ let isFuture=diff<0;
+ let isExpired=diff>18; // 3 hours
+ let isValid=!isFuture && !isExpired;
+ let statusHtml=isFuture?'<span class="bad">❌ Future code (phone clock wrong)</span>':isExpired?'<span class="bad">❌ Expired (over 3h old)</span>':'<span class="ok">✅ Valid</span>';
+ let html=`<div class="box">
+ <div>Worker ID: <b>${escapeHTML(myId)}</b></div>
+ <div>Device: <b>${escapeHTML(deviceId)}</b></div>
+ <div>Age: <b>${is
