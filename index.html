@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CleanTasks Kenya - Earn KES 150</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap');
+body{font-family:'Outfit',sans-serif;background:#020617}
+.glass{background:rgba(30,41,59,0.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1)}
+.shimmer{position:relative;overflow:hidden}
+.shimmer:after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);animation:shim 2s infinite}
+@keyframes shim{100%{left:100%}}
+</style>
+<!-- ADSTERRA POPUNDER -->
+<script>(function(s){s.dataset.zone='10124875',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<!-- ADSTERRA SOCIAL BAR -->
+<script src="https://al5sm.com/pfe/current/tag.min.js" data-zone="10124879" async data-cfasync="false"></script>
+</head>
+<body class="text-white min-h-screen pb-10">
+<div class="max-w-[420px] mx-auto p-4">
+
+<!-- HEADER -->
+<div class="flex justify-between items-center py-4">
+<div class="flex items-center gap-2"><div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400 flex items-center justify-center font-black text-black">C</div><div><div class="font-black leading-none">CleanTasks</div><div class="text-[10px] text-emerald-400 tracking-[0.3em]">KENYA • MPESA</div></div></div>
+<div class="text-[11px] bg-slate-800 px-3 py-1 rounded-full">🟢 <span id="online">1,247</span> online</div>
+</div>
+
+<!-- BALANCE CARD -->
+<div class="glass rounded-[28px] p-6 mt-2 relative overflow-hidden">
+<div class="absolute -right-10 -top-10 w-40 h-40 bg-emerald-500/20 rounded-full blur-2xl"></div>
+<div class="relative">
+<div class="flex justify-between"><span class="text-slate-400 text-xs tracking-widest">YOUR BALANCE</span><span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded-full">KES • MPESA</span></div>
+<div class="text-5xl font-black mt-2">KES <span id="bal">0</span></div>
+<div class="mt-4">
+<div class="flex justify-between text-xs mb-2"><span class="text-slate-400">Tasks Progress</span><span class="font-bold"><span id="views">0</span>/75</span></div>
+<div class="w-full h-3 bg-slate-800 rounded-full overflow-hidden"><div id="bar" class="h-full bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full transition-all duration-700" style="width:0%"></div></div>
+<div class="text-[11px] text-slate-500 mt-2"><span id="left">75</span> tasks left • KES 2 per task</div>
+</div>
+</div>
+</div>
+
+<!-- TASK CARD -->
+<div class="glass rounded-[24px] p-5 mt-5">
+<div class="flex gap-4">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-2xl" id="taskIcon">📧</div>
+<div class="flex-1"><div class="text-[11px] text-slate-400 tracking-widest">CURRENT TASK #<span id="taskNum">1</span></div><div class="font-bold text-lg leading-tight mt-1" id="taskTitle">Clean 23 Spam Emails</div><div class="text-xs text-slate-400 mt-1" id="taskDesc">Open inbox and mark as clean. Quick 6 sec view.</div></div>
+</div>
+<button id="mainBtn" onclick="doTask()" class="w-full mt-5 h-[64px] rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-black font-black text-lg tracking-wide shimmer">👁️ VIEW TASK & EARN KES 2</button>
+<div class="flex justify-center gap-2 mt-3 text-[11px] text-slate-500"><span>⏱️ 6 sec</span><span>•</span><span>💰 Instant</span><span>•</span><span>✅ Safe</span></div>
+</div>
+
+<!-- NATIVE AD CONTAINER - THIS IS WHERE AD SHOWS -->
+<div id="adBox" class="mt-4 rounded-2xl overflow-hidden bg-slate-900 min-h-[120px] flex items-center justify-center text-xs text-slate-600">Ad loading...</div>
+<script async="async" data-cfasync="false" src="https://al5sm.com/a6h2u8g9p0/display.js"></script>
+<div id="container-a6h2u8g9p0"></div>
+
+<!-- HISTORY -->
+<div class="glass rounded-2xl p-4 mt-4"><div class="text-xs text-slate-400 tracking-widest mb-2">RECENT EARNINGS</div><div id="history" class="text-xs space-y-2"></div></div>
+
+<div class="flex gap-2 mt-4">
+<button onclick="resetAll()" class="flex-1 h-10 rounded-xl bg-slate-800 text-xs">Reset if stuck</button>
+<button onclick="location.href='admin.html'" class="flex-1 h-10 rounded-xl bg-slate-800 text-xs">Admin</button>
+</div>
+
+<div class="text-center text-[10px] text-slate-600 mt-6">Adsterra ID: 10124875 • Support: WhatsApp</div>
+</div>
+
+<script>
+const TASKS=[
+{t:"Clean 23 Spam Emails",d:"Mark promotions as read",i:"📧"},
+{t:"Clean 15 Duplicate Photos",d:"Delete blurry duplicates",i:"🖼️"},
+{t:"Clean WhatsApp Cache",d:"Clear 156MB cache files",i:"💬"},
+{t:"Clean 42 Old Contacts",d:"Remove inactive numbers",i:"👤"},
+{t:"Clean Browser History",d:"Clear tracking cookies",i:"🌐"},
+{t:"Clean App Cache",d:"Free up storage space",i:"🧹"},
+{t:"Verify 8 Emails",d:"Check inbox for tasks",i:"✉️"},
+{t:"Organize 12 Files",d:"Sort downloads folder",i:"📁"},
+];
+
+let views = parseInt(localStorage.getItem('ct_views2')||'0');
+let bal = parseInt(localStorage.getItem('ct_bal2')||'0');
+let hist = JSON.parse(localStorage.getItem('ct_hist2')||'[]');
+let doing = false;
+
+function render(){
+ document.getElementById('views').innerText=views;
+ document.getElementById('bal').innerText=bal;
+ document.getElementById('left').innerText=Math.max(0,75-views);
+ document.getElementById('bar').style.width=(views/75*100)+'%';
+ let t = TASKS[views % TASKS.length];
+ document.getElementById('taskTitle').innerText=t.t;
+ document.getElementById('taskDesc').innerText=t.d;
+ document.getElementById('taskIcon').innerText=t.i;
+ document.getElementById('taskNum').innerText=views+1;
+ document.getElementById('history').innerHTML = hist.slice(-5).reverse().map(h=>`<div class="flex justify-between bg-slate-800/50 p-2 rounded-lg"><span>${h}</span><span class="text
