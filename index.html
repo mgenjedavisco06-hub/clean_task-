@@ -4,40 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Clean Task - Earn KES</title>
-<!-- Popunder (31790094) -->
 <script data-cfasync="false" src="https://afders.org/1/0036d0d16690f48467121eddb5f6fd36"></script>
+<script data-cfasync="false" src="https://bicea.org/14/7ff467c0d12ce4158673d459a13e1b3f"></script>
+<script async="async" data-cfasync="false" src="https://bicea.org/21/79cbe257bdf87fc635325c2dc792d823"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#f5f7fb;color:#111;padding:12px}
-.header{background:#fff;padding:14px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,0.06);position:sticky;top:10px;z-index:10}
-.progress{font-weight:bold;color:#0a7c3e}
-.balance{background:#e8f5e9;padding:6px 12px;border-radius:20px;font-weight:bold}
-.channel-box{background:#fff;border:2px solid #25D366;border-radius:12px;padding:12px;margin:14px 0;text-align:center}
-.channel-btn{display:inline-block;background:#25D366;color:#fff;text-decoration:none;padding:10px 18px;border-radius:25px;font-weight:bold}
-.tasks{margin-top:14px;display:grid;gap:10px}
-.task-card{background:#fff;border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
-.task-card.done{opacity:0.5}
-.task-img{width:56px;height:56px;border-radius:10px;object-fit:cover;background:#eee}
-.task-info{flex:1}
-.task-title{font-size:14px;font-weight:600}
-.task-reward{font-size:12px;color:#0a7c3e;margin-top:2px}
-.btn{background:#111;color:#fff;border:0;padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer}
-.btn:disabled{background:#ccc}
-.ad-box{background:#fff;border:1px dashed #ccc;border-radius:12px;padding:8px;margin:14px 0;text-align:center;min-height:90px}
-.footer{text-align:center;padding:20px 10px;color:#777;font-size:12px}
-#payoutSection{display:none;background:#fff;border:2px solid #25D366;border-radius:16px;padding:18px;margin:18px 0;text-align:center;box-shadow:0 4px 12px rgba(37,211,102,0.15)}
+body{background:#f5f7fb;color:#111;padding:10px;padding-bottom:80px}
+.header{background:#fff;padding:14px 16px;border-radius:14px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,0.05);position:sticky;top:10px;z-index:10}
+.progress{font-weight:800;color:#0a7c3e;font-size:16px}
+.balance{background:#e8f5e9;padding:7px 14px;border-radius:20px;font-weight:800;font-size:14px}
+.timer-box{background:#fff8d6;padding:10px 14px;border-radius:10px;margin:12px 0;font-size:13px;color:#5a4a1a;display:flex;align-items:center;gap:6px}
+.ad-box{background:#fff;border:1px dashed #d0d0d0;border-radius:12px;padding:12px;margin:12px 0;text-align:center;min-height:95px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.tasks{margin-top:6px;display:grid;gap:10px}
+.task-card{background:#fff;border-radius:14px;padding:12px;display:flex;gap:12px;align-items:center;box-shadow:0 1px 5px rgba(0,0,0,0.04)}
+.task-card.done{opacity:0.7}
+.task-img{width:58px;height:58px;border-radius:12px;object-fit:cover;background:#eee}
+.task-info{flex:1;text-align:left}
+.task-title{font-size:13.5px;font-weight:600;color:#222;line-height:1.3}
+.task-completed{font-size:12px;color:#5bbf8a;margin-top:3px}
+.btn{background:#111;color:#fff;border:0;padding:8px 18px;border-radius:20px;font-size:13px;cursor:pointer;font-weight:600}
+.btn:disabled{background:#e0e0e0;color:#999}
+.needMore{background:#fff;border-radius:12px;padding:16px;margin:16px 0;text-align:center;font-size:14px;line-height:1.4;box-shadow:0 1px 5px rgba(0,0,0,0.04)}
+#payoutSection{display:none;background:#fff;border:2px solid #25D366;border-radius:16px;padding:18px;margin:16px 0;text-align:center}
 #payoutSection.show{display:block}
-.code-box{background:#f0f0f0;padding:10px;border-radius:8px;font-family:monospace;font-weight:bold;letter-spacing:2px;margin:10px 0;font-size:18px}
-.wa-btn{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;text-decoration:none;padding:12px 20px;border-radius:30px;font-weight:bold;font-size:15px;margin-top:10px}
-.wa-btn.disabled{background:#ccc;pointer-events:none}
-.wa-btn svg{width:22px;height:22px;fill:#fff}
-.timer-box{background:#fff3cd;padding:8px 12px;border-radius:8px;margin:10px 0;font-size:13px;color:#664d03}
-.withdraw-info{background:#e8f5e9;padding:10px;border-radius:8px;margin-top:10px;font-size:13px}
+/* FLOATING CHANNEL BUTTON - SEPARATE */
+.fab-channel{position:fixed;bottom:20px;right:16px;z-index:999;background:#25D366;color:#fff;text-decoration:none;padding:13px 20px;border-radius:30px;font-weight:800;font-size:14px;box-shadow:0 4px 15px rgba(37,211,102,0.4);display:flex;align-items:center;gap:8px}
+.fab-channel:active{transform:scale(0.95)}
 </style>
-<!-- SocialBar (31790096) -->
-<script data-cfasync="false" src="https://bicea.org/14/7ff467c0d12ce4158673d459a13e1b3f"></script>
-<!-- Native Banner Script (31790095) -->
-<script async="async" data-cfasync="false" src="https://bicea.org/21/79cbe257bdf87fc635325c2dc792d823"></script>
 </head>
 <body>
 <div class="header">
@@ -45,26 +38,40 @@ body{background:#f5f7fb;color:#111;padding:12px}
   <div class="balance">KES <span id="bal">0</span> /150</div>
 </div>
 
-<!-- SEPARATE CHANNEL BUTTON - As you requested -->
-<div class="channel-box">
-  <div style="font-size:13px;margin-bottom:8px">🔔 Join for Daily Payout Updates</div>
-  <a class="channel-btn" href="https://whatsapp.com/channel/0029VbDZahjLY6dFCNI1xo2Z" target="_blank">💬 JOIN WHATSAPP CHANNEL</a>
-</div>
-
 <div id="resetTimer" class="timer-box" style="display:none">⏰ New tasks in: <span id="countdown"></span></div>
 
 <div class="ad-box">
-  <small style="color:#999;font-size:10px">Advertisement</small>
+  <small style="color:#999;font-size:11px;margin-bottom:6px">Advertisement</small>
   <div id="container-79cbe257bdf87fc635325c2dc792d823"></div>
 </div>
 
 <div class="tasks" id="taskList"></div>
 
+<div id="needMore" class="needMore" style="display:none">You have KES <span id="needBal">0</span> - Need KES 150 to withdraw.<br>Come back after 24hrs for new tasks!</div>
+
 <div id="payoutSection">
-  <div style="font-size:22px">🎉 KES 150 Reached!</div>
-  <div class="code-box" id="userCode">CT-XXXX</div>
-  <div id="withdrawStatus"></div>
-  <input id="mpesaNum" placeholder="Enter your M-Pesa number 07xx" style="width:90%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-top:10px;text-align:center">
-  <br>
-  <a id="waLink" class="wa-btn" target="_blank" href="#">
-    <svg viewBox="0 0 24 24"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.51 2 2.03 6.48 2.03 12c0 1.76.46 3.48 1.32 4.99L2 22l5.19-1.35A9.82 9.82 0 0 0 12.03 22c5.52 0 10-4.48 10-10 0-2.67-1.04-5.17-2.98-7.09ZM12.03 20a7.9 7.9 0 0 1-4.03-1.1l-.29-.17-3.08.8.82-3-.19-.31A7.93 7.93
+  <div style="font-size:20px;font-weight:700">🎉 KES 150 Reached!</div>
+  <div style="margin-top:8px;font-size:13px">Code: <b id="userCode">CT-XXXX</b></div>
+  <a id="waLink" style="display:inline-block;background:#25D366;color:#fff;padding:12px 22px;border-radius:30px;text-decoration:none;font-weight:bold;margin-top:12px" target="_blank">Withdraw on WhatsApp</a>
+</div>
+
+<div class="ad-box">
+  <small style="color:#999;font-size:11px">Sponsored</small>
+</div>
+
+<!-- SEPARATE FLOATING CHANNEL BUTTON -->
+<a class="fab-channel" href="https://whatsapp.com/channel/0029VbDZahjLY6dFCNI1xo2Z" target="_blank">💬 JOIN CHANNEL</a>
+
+<script>
+const TOTAL=75,REWARD=1,MIN_WITHDRAW=150,RESET_HOURS=24;
+const SMARTLINK="https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4";
+let done=parseInt(localStorage.getItem('done')||'0');
+let bal=parseInt(localStorage.getItem('bal')||'0');
+let lastReset=parseInt(localStorage.getItem('lastReset')||Date.now().toString());
+if((Date.now()-lastReset)/(1000*60*60)>=RESET_HOURS){
+  done=0;localStorage.setItem('done','0');localStorage.setItem('lastReset',Date.now().toString());lastReset=Date.now();
+}
+const tasksData=Array.from({length:TOTAL},(_,i)=>({id:i+1,title:`Task ${i+1}: Follow & Like Partner Page`,img:`https://picsum.photos/seed/task${i+1}/100/100`}));
+function getCode(){let c=localStorage.getItem('userCode');if(!c){c='CT-'+Math.random().toString(36).substr(2,6).toUpperCase();localStorage.setItem('userCode',c);}return c;}
+function render(){
+  document.getElementById('done').innerText
