@@ -1,28 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clean Task</title>
-<script data-cfasync="false" src="https://bicea.org/14/7ff467c0d12ce4158673d459a13e1b3f"></script>
+<title>Clean Task - Earn KES</title>
+<!-- Popunder (31790094) -->
 <script data-cfasync="false" src="https://afders.org/1/0036d0d16690f48467121eddb5f6fd36"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#f5f7fb;color:#111;padding:12px}
+.header{background:#fff;padding:14px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,0.06);position:sticky;top:10px;z-index:10}
+.progress{font-weight:bold;color:#0a7c3e}
+.balance{background:#e8f5e9;padding:6px 12px;border-radius:20px;font-weight:bold}
+.channel-box{background:#fff;border:2px solid #25D366;border-radius:12px;padding:12px;margin:14px 0;text-align:center}
+.channel-btn{display:inline-block;background:#25D366;color:#fff;text-decoration:none;padding:10px 18px;border-radius:25px;font-weight:bold}
+.tasks{margin-top:14px;display:grid;gap:10px}
+.task-card{background:#fff;border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
+.task-card.done{opacity:0.5}
+.task-img{width:56px;height:56px;border-radius:10px;object-fit:cover;background:#eee}
+.task-info{flex:1}
+.task-title{font-size:14px;font-weight:600}
+.task-reward{font-size:12px;color:#0a7c3e;margin-top:2px}
+.btn{background:#111;color:#fff;border:0;padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer}
+.btn:disabled{background:#ccc}
+.ad-box{background:#fff;border:1px dashed #ccc;border-radius:12px;padding:8px;margin:14px 0;text-align:center;min-height:90px}
+.footer{text-align:center;padding:20px 10px;color:#777;font-size:12px}
+#payoutSection{display:none;background:#fff;border:2px solid #25D366;border-radius:16px;padding:18px;margin:18px 0;text-align:center;box-shadow:0 4px 12px rgba(37,211,102,0.15)}
+#payoutSection.show{display:block}
+.code-box{background:#f0f0f0;padding:10px;border-radius:8px;font-family:monospace;font-weight:bold;letter-spacing:2px;margin:10px 0;font-size:18px}
+.wa-btn{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;text-decoration:none;padding:12px 20px;border-radius:30px;font-weight:bold;font-size:15px;margin-top:10px}
+.wa-btn.disabled{background:#ccc;pointer-events:none}
+.wa-btn svg{width:22px;height:22px;fill:#fff}
+.timer-box{background:#fff3cd;padding:8px 12px;border-radius:8px;margin:10px 0;font-size:13px;color:#664d03}
+.withdraw-info{background:#e8f5e9;padding:10px;border-radius:8px;margin-top:10px;font-size:13px}
+</style>
+<!-- SocialBar (31790096) -->
+<script data-cfasync="false" src="https://bicea.org/14/7ff467c0d12ce4158673d459a13e1b3f"></script>
+<!-- Native Banner Script (31790095) -->
 <script async="async" data-cfasync="false" src="https://bicea.org/21/79cbe257bdf87fc635325c2dc792d823"></script>
 </head>
 <body>
-<h2>Clean Task</h2>
+<div class="header">
+  <div class="progress"><span id="done">0</span>/75 Today</div>
+  <div class="balance">KES <span id="bal">0</span> /150</div>
+</div>
 
-<!-- SEPARATE CHANNEL BUTTON -->
-<p><a href="https://whatsapp.com/channel/0029VbDZahjLY6dFCNI1xo2Z" target="_blank"><button>JOIN WHATSAPP CHANNEL</button></a></p>
+<!-- SEPARATE CHANNEL BUTTON - As you requested -->
+<div class="channel-box">
+  <div style="font-size:13px;margin-bottom:8px">🔔 Join for Daily Payout Updates</div>
+  <a class="channel-btn" href="https://whatsapp.com/channel/0029VbDZahjLY6dFCNI1xo2Z" target="_blank">💬 JOIN WHATSAPP CHANNEL</a>
+</div>
 
-<hr>
+<div id="resetTimer" class="timer-box" style="display:none">⏰ New tasks in: <span id="countdown"></span></div>
 
-<!-- TASK BUTTONS = SMARTLINK -->
-<p><a href="https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4" target="_blank"><button>Task 1</button></a></p>
-<p><a href="https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4" target="_blank"><button>Task 2</button></a></p>
-<p><a href="https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4" target="_blank"><button>Task 3</button></a></p>
+<div class="ad-box">
+  <small style="color:#999;font-size:10px">Advertisement</small>
+  <div id="container-79cbe257bdf87fc635325c2dc792d823"></div>
+</div>
 
-<!-- NATIVE BANNER -->
-<div id="container-79cbe257bdf87fc635325c2dc792d823"></div>
+<div class="tasks" id="taskList"></div>
 
-</body>
-</html>
+<div id="payoutSection">
+  <div style="font-size:22px">🎉 KES 150 Reached!</div>
+  <div class="code-box" id="userCode">CT-XXXX</div>
+  <div id="withdrawStatus"></div>
+  <input id="mpesaNum" placeholder="Enter your M-Pesa number 07xx" style="width:90%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-top:10px;text-align:center">
+  <br>
+  <a id="waLink" class="wa-btn" target="_blank" href="#">
+    <svg viewBox="0 0 24 24"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.51 2 2.03 6.48 2.03 12c0 1.76.46 3.48 1.32 4.99L2 22l5.19-1.35A9.82 9.82 0 0 0 12.03 22c5.52 0 10-4.48 10-10 0-2.67-1.04-5.17-2.98-7.09ZM12.03 20a7.9 7.9 0 0 1-4.03-1.1l-.29-.17-3.08.8.82-3-.19-.31A7.93 7.93
