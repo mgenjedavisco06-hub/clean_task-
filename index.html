@@ -4,11 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Clean Task - Earn KES</title>
-<!-- YOUR 4 ADS - DO NOT REMOVE -->
-<script data-cfasync="false" src="https://afders.org/1/0036d0d16690f48467121eddb5f6fd36"></script>
-<script data-cfasync="false" src="https://bicea.org/14/7ff467c0d12ce4158673d459a13e1b3f"></script>
+<!-- Ads scripts - only load at bottom, no popup -->
 <script async="async" data-cfasync="false" src="https://bicea.org/21/79cbe257bdf87fc635325c2dc792d823"></script>
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#f5f7fb;color:#111;padding:12px;padding-bottom:80px}
@@ -24,18 +21,12 @@ body{background:#f5f7fb;color:#111;padding:12px;padding-bottom:80px}
 .task-reward{font-size:12px;color:#0a7c3e;margin-top:2px}
 .btn{background:#111;color:#fff;border:0;padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer}
 .btn:disabled{background:#ccc}
-.ad-box{background:#fff;border:1px dashed #ccc;border-radius:12px;padding:8px;margin:14px 0;text-align:center;min-height:90px}
+.ad-box{background:#fff;border:1px dashed #ccc;border-radius:12px;padding:12px;margin:14px 0;text-align:center;min-height:90px}
 .footer{text-align:center;padding:20px 10px;color:#777;font-size:12px}
-#payoutSection{display:none;background:#fff;border:2px solid #25D366;border-radius:16px;padding:18px;margin:18px 0;text-align:center;box-shadow:0 4px 12px rgba(37,211,102,0.15)}
+#payoutSection{display:none;background:#fff;border:2px solid #25D366;border-radius:16px;padding:18px;margin:18px 0;text-align:center}
 #payoutSection.show{display:block}
-.code-box{background:#f0f0f0;padding:10px;border-radius:8px;font-family:monospace;font-weight:bold;letter-spacing:2px;margin:10px 0;font-size:18px}
-.wa-btn{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;text-decoration:none;padding:12px 20px;border-radius:30px;font-weight:bold;font-size:15px;margin-top:10px}
-.wa-btn.disabled{background:#ccc;pointer-events:none}
-.wa-btn svg{width:22px;height:22px;fill:#fff}
 .timer-box{background:#fff3cd;padding:8px 12px;border-radius:8px;margin:10px 0;font-size:13px;color:#664d03}
-.withdraw-info{background:#e8f5e9;padding:10px;border-radius:8px;margin-top:10px;font-size:13px}
-/* FLOATING SEPARATE CHANNEL BUTTON */
-.fab-channel{position:fixed;bottom:18px;right:14px;z-index:9999;background:#25D366;color:#fff;text-decoration:none;padding:13px 20px;border-radius:30px;font-weight:800;font-size:14px;box-shadow:0 4px 18px rgba(37,211,102,0.45)}
+.fab-channel{position:fixed;bottom:18px;right:14px;z-index:9999;background:#25D366;color:#fff;text-decoration:none;padding:11px 16px;border-radius:30px;font-weight:800;font-size:13px;box-shadow:0 4px 12px rgba(0,0,0,0.15)}
 </style>
 </head>
 <body>
@@ -46,18 +37,34 @@ body{background:#f5f7fb;color:#111;padding:12px;padding-bottom:80px}
 
 <div id="resetTimer" class="timer-box" style="display:none">⏰ New tasks in: <span id="countdown"></span></div>
 
-<div class="ad-box">
-  <small style="color:#999;font-size:10px">Advertisement</small>
-  <div id="container-79cbe257bdf87fc635325c2dc792d823"></div>
-</div>
-
 <div class="tasks" id="taskList"></div>
+
+<div id="needMore" style="display:none;background:#fff;border-radius:12px;padding:14px;margin:18px 0;text-align:center">You have KES <span id="needBal">0</span> - Need KES 150 to withdraw.<br>Come back after 24hrs for new tasks!</div>
 
 <div id="payoutSection">
   <div style="font-size:22px">🎉 KES 150 Reached!</div>
-  <div class="code-box" id="userCode">CT-XXXX</div>
-  <div id="withdrawStatus"></div>
-  <input id="mpesaNum" placeholder="Enter your M-Pesa number 07xx" style="width:90%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-top:10px;text-align:center">
-  <br>
-  <a id="waLink" class="wa-btn" target="_blank" href="#">
-    <svg viewBox="0 0 24 24"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.51 2 2.03 6.48 2.03 12c0 1.76.46 3.48 1.32 4.99L2 22l5.19-1.35A9.82 9.82 0 0 0 12.03 22c5.52 0 10-4.48 10-10 0-2.67-1.04-5.17-2.98-7.09ZM12.03 20a7.9 7.9 0 0 1-4.03-1.1l-.29-.17-3.08.8.82-3-.19-.31A7.93 7.93 0 0 1 4.03 12c0-4.41 3.59-8 8-8 2.14 0 4.15.83 5.66 2.34A7.95 7.95 0 0 1 20.03 12c0 4.41-3.59 8-8 8Zm4.54-5.95c-.25-.12-1.47-.73-1.7-.81-.23-.09-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.88 2.38 1 2.54c.12.17 1.74 2.65 4.22 3.72.59.25 1.05.4
+  <div style="font-weight:bold;margin-top:8px" id="userCode">CT-XXXX</div>
+  <a id="waLink" style="display:inline-block;background:#25D366;color:#fff;padding:12px 20px;border-radius:30px;text-decoration:none;font-weight:bold;margin-top:10px" target="_blank">Withdraw on WhatsApp</a>
+</div>
+
+<!-- ADS DOWNWARD AFTER COMPLETION MESSAGE - LIKE YOU ASKED -->
+<div class="ad-box">
+  <small style="color:#999;font-size:11px;display:block;margin-bottom:8px">Advertisement</small>
+  <div id="container-79cbe257bdf87fc635325c2dc792d823"></div>
+  <small style="color:#999;font-size:11px;display:block;margin-top:10px">Sponsored</small>
+</div>
+
+<!-- Smartlink ad will also be shown here after tasks -->
+<div class="ad-box" id="smartAdBox" style="display:none">
+  <small style="color:#999;font-size:11px">Recommended</small>
+  <a id="smartLinkBtn" href="https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4" target="_blank" style="display:block;background:#111;color:#fff;padding:12px;border-radius:10px;text-decoration:none;margin-top:8px;font-weight:bold">View Sponsored Offer →</a>
+</div>
+
+<div class="footer">Withdrawals: Fridays & Sundays | Tasks reset every 24hrs<br><button onclick="localStorage.clear();location.reload();" style="margin-top:10px;padding:6px 10px;border-radius:10px;border:1px solid #ccc;background:#fff">Reset All (Test)</button></div>
+
+<a class="fab-channel" href="https://whatsapp.com/channel/0029VbDZahjLY6dFCNI1xo2Z" target="_blank">💬 Channel</a>
+
+<script>
+const TOTAL=75,REWARD=1,MIN_WITHDRAW=150,RESET_HOURS=24;
+const SMARTLINK="https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4";
+let done=parseInt(localStorage.getItem('done
