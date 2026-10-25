@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clean Task - Earn KES</title>
+<!-- Confirm this /1/ script's required placement in your Adsterra dashboard before production. -->
+<script data-cfasync="false" src="https://afders.org/1/0036d0d16690f48467121eddb5f6fd36"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#f5f7fb;color:#111;padding:12px}
+.header{background:#fff;padding:14px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.06);position:sticky;top:10px;z-index:10}
+.progress{font-weight:bold;color:#0a7c3e}.balance{background:#e8f5e9;padding:6px 12px;border-radius:20px;font-weight:bold}
+.tasks{margin-top:14px;display:grid;gap:10px}.task-card{background:#fff;border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.task-card.done{opacity:.5}.task-img{width:56px;height:56px;border-radius:10px;object-fit:cover;background:#eee}.task-info{flex:1}
+.task-title{font-size:14px;font-weight:600}.task-reward{font-size:12px;color:#0a7c3e;margin-top:2px}
+.btn{background:#111;color:#fff;border:0;padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer}.btn:disabled{background:#ccc}
+.ad-box{background:#fff;border:1px dashed #ccc;border-radius:12px;padding:8px;margin:14px 0;text-align:center;min-height:90px}
+.ad-label{color:#999;font-size:10px;display:block;margin-bottom:6px}.footer{text-align:center;padding:20px 10px;color:#777;font-size:12px}
+#payoutSection{display:none;background:#fff;border:2px solid #25D366;border-radius:16px;padding:18px;margin:18px 0;text-align:center;box-shadow:0 4px 12px rgba(37,211,102,.15)}
+#payoutSection.show{display:block}.code-box{background:#f0f0f0;padding:10px;border-radius:8px;font-family:monospace;font-weight:bold;letter-spacing:2px;margin:10px 0;font-size:18px}
+.wa-btn{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;text-decoration:none;padding:12px 20px;border-radius:30px;font-weight:bold;font-size:15px;margin-top:10px}
+.timer-box{background:#fff3cd;padding:8px 12px;border-radius:8px;margin:10px 0;font-size:13px;color:#664d03}
+.notice{background:#fff3cd;color:#664d03;border-radius:10px;padding:10px;margin:12px 0;font-size:12px;line-height:1.4}
+</style>
+</head>
+<body>
+<div class="header"><div class="progress"><span id="done">0</span>/75 Today</div><div class="balance">KES <span id="bal">0</span> /150</div></div>
+<div id="resetTimer" class="timer-box" style="display:none">⏰ New tasks in: <span id="countdown"></span></div>
+
+<!-- Social Bar /14 is loaded once below, outside this inline ad box. -->
+<div class="ad-box"><small class="ad-label">Advertisement</small><p style="font-size:12px;color:#777">Advertisement space</p></div>
+
+<div class="tasks" id="taskList"></div>
+
+<div id="payoutSection">
+  <div style="font-size:22px">🎉 KES 150 Reached!</div><div class="code-box" id="userCode">CT-XXXX</div><div id="withdrawStatus"></div>
+  <input id="mpesaNum" inputmode="tel" autocomplete="tel" placeholder="Enter your M-Pesa number 07xx" style="width:90%;padding:10px;border-radius:8px;border:1px solid #ccc;margin-top:10px;text-align:center">
+  <br><a id="waLink" class="wa-btn" target="_blank" rel="noopener noreferrer" href="#"><span id="waBtnText">Withdraw on WhatsApp</span></a>
+</div>
+
+<div id="needMore" style="display:none;background:#fff;border-radius:12px;padding:14px;margin:18px 0;text-align:center">You have KES <span id="needBal">0</span> - Need KES 150 to withdraw.<br>Come back after 24hrs for new tasks!</div>
+
+<!-- Native Banner /21 script and matching container kept together. -->
+<div class="ad-box">
+  <small class="ad-label">Sponsored</small>
+  <script async="async" data-cfasync="false" src="https://bicea.org/21/79cbe257bdf87fc635325c2dc792d823"></script>
+  <div id="container-79cbe257bdf87fc635325c2dc792d823"></div>
+  <a href="https://asiafilm.org/4/ee794686e029ba5667e87b360abfa3f4" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:10px;background:#111;color:#fff;padding:10px 18px;border-radius:20px;text-decoration:none;font-weight:bold;font-size:13px">View Sponsored Offer →</a>
+</div>
+
+<div class="notice">Task progress and balances in this demo are stored in this browser only. They are not server-verified earnings. Ad clicks or impressions do not prove task completion or revenue.</div>
+<div class="footer">💰 Withdrawals: Fridays & Sundays Only | Tasks reset every 24hrs<br><button id="resetTestBtn" style="margin-top:10px;padding:6px 10px;border-radius:10px;border:1px solid #ccc;background:#fff">Reset All (Test)</button></div>
+
+<!-- Social Bar /14 script: loaded once, outside the inline ad box. Confirm placement in Adsterra. -->
+<script data-cfasync="false" src="https://bicea.org/14/7ff467c0d12ce4158673d459a13e1b3f"></script>
+
+<script>
+'use strict';
+const TOTAL=75,REWARD=1,MIN_WITHDRAW=150,RESET_HOURS=24;
+let done=parseInt(localStorage.getItem('done')||'0',10);
+let bal=parseInt(localStorage.getItem('bal')||'0',10);
+let lastReset=parseInt(localStorage.getItem('lastReset')||String(Date.now()),10);
+if(!Number.isFinite(done)||done<0||done>TOTAL)done=0;
+if(!Number.isFinite(bal)||bal<0)bal=0;
+if(!Number.isFinite(lastReset)||lastReset<=0)lastReset=Date.now();
+if((Date.now()-lastReset)/3600000>=RESET_HOURS){done=0;localStorage.setItem('done','0');localStorage.setItem('lastReset',String(Date.now()));lastReset=Date.now();}
+const tasksData=Array.from({length:TOTAL},(_,i)=>({id:i+1,title:`Task ${i+1}: Follow & Like Partner Page`,reward:`+ KES ${REWARD}`,img:`https://picsum.photos/seed/task${i+1}/100/100`}));
+function getCode(){let c=localStorage.getItem('userCode');if(!c){c='CT-'+Math.random().toString(36).slice(2,8).toUpperCase();localStorage.setItem('userCode',c);}return c;}
+function updateWhatsAppLink(){const phone=document.getElementById('mpesaNum').value.trim();const msg=`Withdrawal request ${getCode()}, balance KES ${bal}. M-Pesa number: ${phone||'not entered'}`;document.getElementById('waLink').href='https://wa.me/254119348942?text='+encodeURIComponent(msg);}
+function render(){
+ document.getElementById('done').textContent=String(done);document.getElementById('bal').textContent=String(bal);
+ const list=document.getElementById('taskList');list.replaceChildren();
+ tasksData.forEach(t=>{const isDone=t.id<=done,div=document.createElement('div');div.className='task-card'+(isDone?' done':'');
+ const img=document.createElement('img');img.className='task-img';img.src=t.img;img.alt='';img.loading='lazy';
+ const info=document.createElement('div');info.className='task-info';const title=document.createElement('div');title.className='task-title';title.textContent=t.title;
+ const reward=document.createElement('div');reward.className='task-reward';reward.textContent=isDone?'Completed (demo)':t.reward;
+ const btn=document.createElement('button');btn.className='btn';btn.textContent=isDone?'Done':'Do Task';btn.disabled=isDone;btn.addEventListener('click',()=>doTask(t.id,btn));
+ info.append(title,reward);div.append(img,info,btn);list.appendChild(div);});
+ const payout=document.getElementById('payoutSection'),needMore=document.getElementById('needMore');
+ if(bal>=MIN_WITHDRAW){payout.classList.add('show');needMore.style.display='none';document.getElementById('userCode').textContent=getCode();updateWhatsAppLink();}
+ else{payout.classList.remove('show');if(done>=TOTAL){needMore.style.display='block';document.getElementById('needBal').textContent=String(bal);}else needMore.style.display='none';}
+ document.getElementById('resetTimer').style.display=done>=TOTAL?'block':'none';
+}
+function doTask(id,btn){
+ // Demo-only task progression. This does not verify a real task or Adsterra event.
+ if(id!==done+1||btn.disabled)return;
+ btn.textContent='Processing demo...';btn.disabled=true;
+ setTimeout(()=>{done++;bal+=REWARD;localStorage.setItem('done',String(done));localStorage.setItem('bal',String(bal));render();},1200);
+}
+document.getElementById('mpesaNum').addEventListener('input',updateWhatsAppLink);
+document.getElementById('resetTestBtn').addEventListener('click',()=>{if(confirm('Reset demo progress and balance on this browser?')){['done','bal','lastReset','userCode'].forEach(k=>localStorage.removeItem(k));location.reload();}});
+setInterval(()=>{const diff=lastReset+RESET_HOURS*3600000-Date.now();if(diff<=0){localStorage.setItem('done','0');localStorage.setItem('lastReset',String(Date.now()));location.reload();return;}const h=Math.floor(diff/3600000),m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);document.getElementById('countdown').textContent=`${h}h ${m}m ${s}s`;},1000);
+render();
+</script>
+</body>
+</html>
